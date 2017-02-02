@@ -10,10 +10,14 @@ else:
     host = hosts_dev
 
 redirect = "127.0.0.1"
-website_list = ["nytimes.com", "latimes.com", "facebook.com", "www.facebook.com", "news.ycombinator.com", "reddit.com"]
+
+website_list = []
+with open("block.txt", "r") as file:
+    for site in file:
+        website_list.append(site.strip("\n"))
 
 while True:
-    if dt(dt.now().year, dt.now().month, dt.now().day, 8, 30) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 17):
+    if dt(dt.now().year, dt.now().month, dt.now().day, 13, 30) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 17):
         print('Working Time...')
         with open(host, 'r+') as file:
             content = file.read()

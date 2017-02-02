@@ -1,0 +1,6 @@
+nytimes.com
+latimes.com
+facebook.com
+www.facebook.com
+news.ycombinator.com
+reddit.com
