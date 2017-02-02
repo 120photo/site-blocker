@@ -1,15 +1,21 @@
 import time
 from datetime import datetime as dt
 
-hosts_temp = "hosts"
-hosts_path = "/etc/hosts"
+hosts_dev = "hosts"
+hosts_live = "/etc/hosts" #path for macOS and linux, change for windows.
+mode = "dev" # change to read "live" when you want to go live.
+if mode == "live":
+    host = hosts_live
+else:
+    host = hosts_dev
+
 redirect = "127.0.0.1"
 website_list = ["nytimes.com", "latimes.com", "facebook.com", "www.facebook.com", "news.ycombinator.com", "reddit.com"]
 
 while True:
     if dt(dt.now().year, dt.now().month, dt.now().day, 8, 30) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 17):
         print('Working Time...')
-        with open(hosts_temp, 'r+') as file:
+        with open(host, 'r+') as file:
             content = file.read()
             # print(content)
             for website in website_list:
@@ -19,7 +25,7 @@ while True:
                     file.write("{} {}\n".format(redirect, website))
     else:
         print("Off Hours...")
-        with open(hosts_temp, 'r+') as file:
+        with open(host, 'r+') as file:
             content = file.readlines()
             file.seek(0)
             for line in content:
