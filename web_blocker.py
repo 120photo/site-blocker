@@ -1,9 +1,8 @@
 import time
 from datetime import datetime as dt
+from settings import *
 
-hosts_dev = "hosts"
-hosts_live = "/etc/hosts" #path for macOS and linux, change for windows.
-mode = "dev" # change to read "live" when you want to go live.
+
 if mode == "live":
     host = hosts_live
 else:
@@ -16,8 +15,9 @@ with open("block.txt", "r") as file:
     for site in file:
         website_list.append(site.strip("\n"))
 
+
 while True:
-    if dt(dt.now().year, dt.now().month, dt.now().day, 13, 30) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 17):
+    if start_hours < dt.now() < end_hours:
         print('Working Time...')
         with open(host, 'r+') as file:
             content = file.read()
@@ -36,4 +36,4 @@ while True:
                 if not any(website in line for website in website_list):
                     file.write(line)
             file.truncate()
-    time.sleep(3)
+    time.sleep(60) #set to number of seconds you want while loop to wait to check again.
