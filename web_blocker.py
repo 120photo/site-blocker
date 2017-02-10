@@ -8,7 +8,7 @@ if mode == "live":
     interval = 60  # pause while loop 60 seconds when live
 else:
     host = hosts_dev
-    internal = 3  # pause while loop 3 seconds when in dev
+    interval = 3  # pause while loop 3 seconds when in dev
 
 redirect = "127.0.0.1"
 
@@ -38,4 +38,4 @@ while True:
                 if not any(website in line for website in website_list):
                     file.write(line)
             file.truncate()
-    time.sleep(internal)
+    time.sleep(interval)
